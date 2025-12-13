@@ -7,7 +7,7 @@ import {
   ToastTitle,
   ToastViewport,
 // FIXED: Changed "./components/ui/toast" to "./toast"
-} from "./toast"; 
+} from "./ui/toast"; 
 
 export function Toaster() {
   const { toasts } = useToast();
