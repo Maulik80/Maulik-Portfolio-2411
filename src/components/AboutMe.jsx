@@ -39,10 +39,11 @@ export const AboutSection = () => {
               <a href="#contact" className="cosmic-button">Get In Touch</a>
 
               <a
-                href=""
+                href="/Maulik_Gandhi_Resume.pdf"
+                download="Maulik_Gandhi_Resume.pdf"
                 className="px-6 py-2 transition-colors duration-300 border rounded-full border-primary text-primary hover:bg-primary/10"
               >
-                Download CV
+                Download RESUME
               </a>
             </div>
           </div>

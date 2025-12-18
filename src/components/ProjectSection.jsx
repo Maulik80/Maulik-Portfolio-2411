@@ -5,7 +5,7 @@ const projects = [
     id: 1,
     title: "🎯 Project One-Line Summary",
     description: "A React application that demonstrates state management and data flow by providing a live, theme-toggling profile card preview of user-typed input.",
-    image: "public\\project1.png",
+    image: "\project1.png",
     tags: ["JavaScript", "CSS", "HTML"],
     demoUrl: "#",
     githubUrl: "#",

@@ -32,10 +32,12 @@ export const HeroSection = ()=>{
           </div>
         </div> 
 
-       <div className="absolute flex flex-col items-center transform -translate-x-1/2 bottom-8 left-1/2 animate-bounce">
-        <span className="mb-2 text-sm text-muted-foreground"> Scroll </span>
+       <a
+       href="#about" 
+       className="absolute flex flex-col items-center transform -translate-x-1/2 bottom-8 left-1/2 animate-bounce">
+        <span className="mb-2 text-sm text-muted-foreground" > Scroll </span>
         <ArrowDown className="w-5 h-5 text-primary" />
-      </div>
+      </a>
 
        </section>
     );

@@ -1,13 +1,4 @@
-import {
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  Twitch,
-  Twitter,
-} from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Phone, Send, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
@@ -15,163 +6,108 @@ import { useState } from "react";
 export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    honeypot: "", // Hidden field for bot detection
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) throw new Error(result.message || "Submission failed");
+
       toast({
         title: "Message sent!",
         description: "Thank you for your message. I'll get back to you soon.",
       });
+
+      setFormData({ name: "", email: "", subject: "", message: "", honeypot: "" });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error!",
+        description: error.message || "Could not send message. Please try again.",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
+
   return (
     <section id="contact" className="relative px-4 py-24 bg-secondary/30">
       <div className="container max-w-5xl mx-auto">
         <h2 className="mb-4 text-3xl font-bold text-center md:text-4xl">
           Get In <span className="text-primary"> Touch</span>
         </h2>
-
         <p className="max-w-2xl mx-auto mb-12 text-center text-muted-foreground">
-          Have a project in mind or want to collaborate? Feel free to reach out.
-          I'm always open to discussing new opportunities.
+          Have a project in mind? Let's discuss new opportunities.
         </p>
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+          {/* Contact Info */}
           <div className="space-y-8">
-            <h3 className="mb-6 text-2xl font-semibold">
-              {" "}
-              Contact Information
-            </h3>
-
-            <div className="justify-center space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="w-6 h-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Email</h4>
-                  <a
-                    href="mailto:maulikgan80@gmail.com"
-                    className="transition-colors text-muted-foreground hover:text-primary"
-                  >
-                    maulikgan80@gmail.com
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Phone className="w-6 h-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Phone</h4>
-                  <a
-                    href="tel:+918140313930"
-                    className="transition-colors text-muted-foreground hover:text-primary"
-                  >
-                    +91 8140313930
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <MapPin className="w-6 h-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Location</h4>
-                  <a className="transition-colors text-muted-foreground hover:text-primary">
-                    Vadodara, Gujarat, India
-                  </a>
-                </div>
-              </div>
+            <h3 className="mb-6 text-2xl font-semibold">Contact Information</h3>
+            <div className="space-y-6">
+              <ContactInfoItem icon={<Mail className="text-primary" />} label="Email" value="maulikgan80@gmail.com" href="mailto:maulikgan80@gmail.com" />
+              <ContactInfoItem icon={<Phone className="text-primary" />} label="Phone" value="+91 8140313930" href="tel:+918140313930" />
+              <ContactInfoItem icon={<MapPin className="text-primary" />} label="Location" value="Vadodara, Gujarat, India" />
             </div>
-
             <div className="pt-8">
-              <h4 className="mb-4 font-medium"> Connect With Me</h4>
-              <div className="flex justify-center space-x-4">
-                <a href="#" target="_blank">
-                  <Linkedin />
-                </a>
-                <a href="#" target="_blank">
-                  <Twitter />
-                </a>
-                <a href="#" target="_blank">
-                  <Instagram />
-                </a>
+              <h4 className="mb-4 font-medium">Connect With Me</h4>
+              <div className="flex space-x-4">
+                <SocialLink href="#" icon={<Linkedin />} />
+                <SocialLink href="#" icon={<Twitter />} />
+                <SocialLink href="#" icon={<Instagram />} />
               </div>
             </div>
           </div>
 
-          <div
-            className="p-8 rounded-lg shadow-xs bg-card"
-            onSubmit={handleSubmit}
-          >
-            <h3 className="mb-6 text-2xl font-semibold"> Send a Message</h3>
+          {/* Form */}
+          <div className="p-8 rounded-lg shadow-sm bg-card">
+            <h3 className="mb-6 text-2xl font-semibold">Send a Message</h3>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              {/* HONEYPOT - Hidden from humans */}
+              <input type="text" name="honeypot" className="hidden" value={formData.honeypot} onChange={handleChange} tabIndex="-1" autoComplete="off" />
 
-            <form className="space-y-6">
+              <InputField label="Your Name" name="name" value={formData.name} onChange={handleChange} placeholder="Maulik Gandhi" />
+              <InputField label="Your Email" type="email" name="email" value={formData.email} onChange={handleChange} placeholder="maulik@example.com" />
+              <InputField label="Subject" name="subject" value={formData.subject} onChange={handleChange} placeholder="Project Inquiry" />
+              
               <div>
-                <label
-                  htmlFor="name"
-                  className="block mb-2 text-sm font-medium"
-                >
-                  {" "}
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 border rounded-md border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="Maulik Gandhi..."
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium"
-                >
-                  {" "}
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 border rounded-md border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="maulikgandhi80@gmail.com"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block mb-2 text-sm font-medium"
-                >
-                  {" "}
-                  Your Message
-                </label>
+                <label className="block mb-2 text-sm font-medium">Your Message</label>
                 <textarea
-                  id="message"
                   name="message"
                   required
-                  className="w-full px-4 py-3 border rounded-md resize-none border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
-                  placeholder="Hello, I'd like to talk about..."
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full h-32 px-4 py-3 border rounded-md resize-none border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Tell me about your project..."
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
-                )}
+                className={cn("cosmic-button w-full flex items-center justify-center gap-2", isSubmitting && "opacity-70")}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
                 <Send size={16} />
@@ -183,3 +119,25 @@ export const ContactSection = () => {
     </section>
   );
 };
+
+// Reusable Components
+const ContactInfoItem = ({ icon, label, value, href }) => (
+  <div className="flex items-start space-x-4">
+    <div className="p-3 rounded-full bg-primary/10">{icon}</div>
+    <div>
+      <h4 className="font-medium">{label}</h4>
+      {href ? <a href={href} className="transition-colors text-muted-foreground hover:text-primary">{value}</a> : <span className="text-muted-foreground">{value}</span>}
+    </div>
+  </div>
+);
+
+const SocialLink = ({ href, icon }) => (
+  <a href={href} target="_blank" className="transition-colors text-muted-foreground hover:text-primary">{icon}</a>
+);
+
+const InputField = ({ label, type = "text", ...props }) => (
+  <div>
+    <label className="block mb-2 text-sm font-medium">{label}</label>
+    <input type={type} required className="w-full px-4 py-3 border rounded-md border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary" {...props} />
+  </div>
+);
