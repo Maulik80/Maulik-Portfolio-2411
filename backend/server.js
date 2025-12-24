@@ -8,9 +8,13 @@ require('dotenv').config();
 const app = express();
 
 // 1. Enhanced Security: Dynamic CORS
-// This allows your frontend to talk to the backend.
+// Allows Localhost (for testing) AND your Production Frontend (once deployed)
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173", // Use Env var in prod, localhost in dev
+    origin: [
+        "http://localhost:5173",             // Local Frontend
+        process.env.FRONTEND_URL,            // Production Frontend (Set in Render)
+        "https://maulik-portfolio-backend.onrender.com" // Safety Fallback
+    ],
     methods: ["POST"],
     optionsSuccessStatus: 200
 }));
@@ -18,7 +22,6 @@ app.use(cors({
 app.use(express.json());
 
 // 2. Spam Prevention: Rate Limiting
-// Prevents spam by limiting requests to 5 per hour per IP.
 const contactLimit = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
     max: 5, 
@@ -34,12 +37,12 @@ apiKey.apiKey = process.env.BREVO_API_KEY; // Securely pulled from .env
 app.post('/api/contact', contactLimit, async (req, res) => {
     const { name, email, subject, message, honeypot } = req.body;
 
-    // A. Honeypot check (Bot Trap)
+    // A. Honeypot check
     if (honeypot) {
         return res.status(400).json({ message: "Bot detected. Request denied." });
     }
 
-    // B. Data Sanitization (Security)
+    // B. Data Sanitization
     const cleanName = DOMPurify.sanitize(name);
     const cleanEmail = DOMPurify.sanitize(email);
     const cleanSubject = DOMPurify.sanitize(subject);
@@ -69,8 +72,7 @@ app.post('/api/contact', contactLimit, async (req, res) => {
         </html>
     `;
     
-    // Sender & Recipient Configuration
-    // SENDER_EMAIL must be verified in Brevo Dashboard
+    // SENDER: Must be your verified sender in Brevo
     sendSmtpEmail.sender = { "name": "Portfolio System", "email": process.env.SENDER_EMAIL };
     sendSmtpEmail.to = [{ "email": process.env.SENDER_EMAIL, "name": "Maulik Gandhi" }];
     sendSmtpEmail.replyTo = { "email": cleanEmail, "name": cleanName };
