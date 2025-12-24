@@ -2,7 +2,7 @@ import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export const ThemeToggle = () => {
+export const ThemeToggle = ({className}) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
@@ -28,12 +28,12 @@ export const ThemeToggle = () => {
     }
   };
 
-  return (
+return (
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-        "focus:outlin-hidden"
+        "z-50 p-2 rounded-full transition-colors duration-300 focus:outline-none",
+        className // Allows Navbar to control positioning
       )}
     >
       {isDarkMode ? (

@@ -7,8 +7,8 @@ const projects = [
     description: "A React application that demonstrates state management and data flow by providing a live, theme-toggling profile card preview of user-typed input.",
     image: "\project1.png",
     tags: ["JavaScript", "CSS", "HTML"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://personal-profile-card-orcin.vercel.app/",
+    githubUrl: "https://github.com/Maulik80/personal-profile-card",
   },
  
 ];

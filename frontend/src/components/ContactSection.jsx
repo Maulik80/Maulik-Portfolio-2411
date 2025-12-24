@@ -20,12 +20,15 @@ export const ContactSection = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Dynamic URL: Uses VITE_API_URL from .env if available, otherwise defaults to localhost
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -74,9 +77,8 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="mb-4 font-medium">Connect With Me</h4>
               <div className="flex space-x-4">
-                <SocialLink href="#" icon={<Linkedin />} />
-                <SocialLink href="#" icon={<Twitter />} />
-                <SocialLink href="#" icon={<Instagram />} />
+                <SocialLink href="https://www.linkedin.com/in/maulik-gandhi-70b649370/" icon={<Linkedin />} />
+                <SocialLink href="https://www.instagram.com/mr.gandhi_2411?igsh=NDNjcGk5Z3lwcGFx" icon={<Instagram />} />
               </div>
             </div>
           </div>
