@@ -1,16 +1,56 @@
-# React + Vite
+# 🚀 Maulik Portfolio - Full Stack Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive, and interactive portfolio website built to showcase my skills, projects, and professional journey. This project features a **React-based frontend** with a beautiful UI and a secure **Node.js/Express backend** for handling contact form submissions via Brevo.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [Insert Your Vercel Link Here]
+🔌 **Backend API:** [Insert Your Render Link Here]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **🎨 Modern UI/UX:** Built with **React** and **Tailwind CSS** for a sleek, responsive design.
+- **🌙 Dark/Light Mode:** Seamless theme switching integrated into the Navbar.
+- **📧 Working Contact Form:** Secure email delivery using **Brevo (formerly Sendinblue)** API.
+- **🛡️ Security Best Practices:**
+  - **Rate Limiting:** Prevents spam (max 5 emails/hour per IP).
+  - **Honeypot Strategy:** Blocks automated bots.
+  - **Input Sanitization:** Protects against XSS attacks using `isomorphic-dompurify`.
+  - **CORS Configuration:** securely connects Frontend and Backend.
+- **⚡ Fast Performance:** Powered by **Vite** for lightning-fast development and build times.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+### **Frontend**
+- **Library:** React (v19)
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS (v4)
+- **Icons:** Lucide React
+- **Notifications:** Custom Toast Hooks
+
+### **Backend**
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Email Service:** Brevo SDK (@getbrevo/brevo)
+- **Security:** Express-Rate-Limit, CORS, DOMPurify
+
+---
+
+## 📂 Project Structure
+
+This project follows a **Monorepo-style** structure:
+
+```bash
+Maulik-Portfolio-2411/
+├── frontend/         # React Client Application
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── backend/          # Express Server Application
+│   ├── server.js
+│   └── package.json
+│
+└── README.md         # Project Documentation
