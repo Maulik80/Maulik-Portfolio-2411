@@ -10,8 +10,16 @@ const projects = [
     tags: ["React", "Node.js", "Tailwind CSS"], // Cleaned up tags
     demoUrl: "https://personal-profile-card-orcin.vercel.app/",
     githubUrl: "https://github.com/Maulik80/personal-profile-card",
+  },{
+    id: 2,
+    title: "MERN Authentication System", 
+    description:
+      "A production-ready authentication system featuring secure Login/Signup, Email Verification (OTP), and Password Reset. Built with a focus on security using JWT (HttpOnly cookies) and Nodemailer for email services.",
+    image: "/MERN-AUTH.png", // Replace with a screenshot of your login page
+    tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+    demoUrl: "https://mern-auth-three-sooty.vercel.app/", // Replace with your actual Vercel link
+    githubUrl: "https://github.com/Maulik80/MERN-AUTH",
   },
-  // You can add more projects here
 ];
 
 export const ProjectsSection = () => {
@@ -46,7 +54,7 @@ export const ProjectsSection = () => {
                 <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-black/40 group-hover:opacity-100" />
               </div>
 
-              <div className="flex flex-col flex-grow p-6">
+              <div className="flex flex-col p-6 grow">
                 {/* Tech Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
@@ -63,7 +71,7 @@ export const ProjectsSection = () => {
                   {project.title}
                 </h3>
 
-                <p className="flex-grow mb-6 text-sm leading-relaxed text-muted-foreground">
+                <p className="mb-6 text-sm leading-relaxed grow text-muted-foreground">
                   {project.description}
                 </p>
 

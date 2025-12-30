@@ -5,7 +5,7 @@ const rateLimit = require("express-rate-limit");
 const DOMPurify = require("isomorphic-dompurify");
 require("dotenv").config();
 
-console.log("🔑 BREVO KEY LOADED:", process.env.BREVO_API_KEY);
+// console.log("🔑 BREVO KEY LOADED:", process.env.BREVO_API_KEY);
 
 const app = express();
 
