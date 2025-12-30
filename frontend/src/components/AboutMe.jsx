@@ -1,63 +1,60 @@
-import { Briefcase, Code, User } from "lucide-react";
+import { Briefcase, Code, Globe, User } from "lucide-react";
 
 export const AboutSection = () => {
   return (
-    <section id="about" className="relative px-4 py-24">
+    <section id="about" className="relative px-4 py-32">
       <div className="container max-w-5xl mx-auto">
-        <h2 className="mb-12 text-3xl font-bold text-center md:text-4xl">
-          About <span className="text-primary"> Me</span>
+        <h2 className="mb-16 text-3xl font-bold text-center md:text-5xl">
+          About <span className="text-primary text-glow"> Me</span>
         </h2>
 
-        <div className="grid items-center grid-cols-1 gap-12 md:grid-cols-2">
+        <div className="grid items-center grid-cols-1 gap-16 md:grid-cols-2">
           
-          {/* LEFT SIDE */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold">
-              Full-Stack Web Developer | Modern UI & Interaction Builder
+          {/* LEFT SIDE: Text Content */}
+          <div className="space-y-8 text-left">
+            <h3 className="text-2xl font-bold leading-tight md:text-3xl">
+              Full-Stack Web Developer <br /> 
+              <span className="text-primary">Modern UI & Interaction Builder</span>
             </h3>
 
-            <p className="text-muted-foreground">
-              I’m a full-stack developer specializing in the MERN stack, focused on
-              building responsive, high-performance, and user-centered web applications.
-              I enjoy creating clean interfaces, smooth interactions, and purposeful
-              digital products that solve real problems.
-            </p>
+            <div className="space-y-4 text-lg text-muted-foreground">
+              <p>
+                I’m a full-stack developer specializing in the <strong className="text-foreground">MERN stack</strong>, focused on
+                building responsive, high-performance, and user-centered web applications.
+              </p>
+              <p>
+                I enjoy creating clean interfaces, smooth interactions, and purposeful
+                digital products that solve real problems. I’m passionate about exploring modern tools and
+                continuously improving my craft.
+              </p>
+            </div>
 
-            <p className="text-muted-foreground">
-              I’m passionate about exploring modern tools, writing efficient code, and
-              continuously improving my craft to stay aligned with today’s fast-moving
-              web development ecosystem.
-            </p>
-
-            <p className="text-muted-foreground">
-              My goal is to deliver scalable, visually refined, and meaningful
-              solutions that provide an exceptional user experience across all
-              platforms.
-            </p>
-
-            <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
-              <a href="#contact" className="cosmic-button">Get In Touch</a>
+            <div className="flex flex-col gap-4 pt-6 sm:flex-row">
+              <a href="#contact" className="text-center cosmic-button">
+                Get In Touch
+              </a>
 
               <a
                 href="/Maulik_Gandhi_Resume.pdf"
                 download="Maulik_Gandhi_Resume.pdf"
-                className="px-6 py-2 transition-colors duration-300 border rounded-full border-primary text-primary hover:bg-primary/10"
+                className="flex items-center justify-center px-6 py-2 font-medium transition-all duration-300 border-2 rounded-full border-primary text-primary hover:bg-primary/10 hover:scale-105 active:scale-95"
               >
-                Download RESUME
+                Download Resume
               </a>
             </div>
           </div>
 
-          {/* RIGHT SIDE CARDS */}
+          {/* RIGHT SIDE: Glass Cards */}
           <div className="grid grid-cols-1 gap-6">
-            <div className="p-6 gradient-border card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Code className="w-6 h-6 text-primary" />
+            
+            <div className="p-6 glass-card card-hover group">
+              <div className="flex items-start gap-5">
+                <div className="p-3 transition-colors rounded-full bg-primary/20 group-hover:bg-primary/30">
+                  <Globe className="w-8 h-8 text-primary" />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-lg font-semibold">Web Development</h4>
-                  <p className="text-muted-foreground">
+                  <h4 className="text-xl font-bold">Web Development</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     Developing responsive, feature-rich, and high-performance web
                     applications using modern frameworks and best practices.
                   </p>
@@ -65,14 +62,14 @@ export const AboutSection = () => {
               </div>
             </div>
 
-            <div className="p-6 gradient-border card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <User className="w-6 h-6 text-primary" />
+            <div className="p-6 glass-card card-hover group">
+              <div className="flex items-start gap-5">
+                <div className="p-3 transition-colors rounded-full bg-primary/20 group-hover:bg-primary/30">
+                  <User className="w-8 h-8 text-primary" />
                 </div>
                 <div className="text-left">
-                  <h4 className="text-lg font-semibold">UI/UX Design</h4>
-                  <p className="text-muted-foreground">
+                  <h4 className="text-xl font-bold">UI/UX Design</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     Designing intuitive, aesthetic, and user-friendly interfaces focused
                     on accessibility and seamless interaction.
                   </p>
@@ -80,15 +77,14 @@ export const AboutSection = () => {
               </div>
             </div>
 
-            <div className="p-6 gradient-border card-hover">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Briefcase className="w-6 h-6 text-primary" />
+            <div className="p-6 glass-card card-hover group">
+              <div className="flex items-start gap-5">
+                <div className="p-3 transition-colors rounded-full bg-primary/20 group-hover:bg-primary/30">
+                  <Briefcase className="w-8 h-8 text-primary" />
                 </div>
-
                 <div className="text-left">
-                  <h4 className="text-lg font-semibold">Project Management</h4>
-                  <p className="text-muted-foreground"  >
+                  <h4 className="text-xl font-bold">Project Management</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     Managing projects end-to-end with agile workflows—from planning and
                     design to development, deployment, and optimization.
                   </p>
@@ -99,8 +95,6 @@ export const AboutSection = () => {
 
         </div>
       </div>
-
-
     </section>
   );
 };

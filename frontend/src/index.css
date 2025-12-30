@@ -4,6 +4,8 @@
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted)); 
+  --color-muted-foreground: hsl(var(--muted-foreground));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
@@ -20,45 +22,21 @@
   --animate-meteor: meteor 5s linear infinite;
 
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
   @keyframes pulse-subtle {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
   }
   @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   @keyframes meteor {
-    0% {
-      transform: rotate(215deg) translateX(0);
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(215deg) translateX(-500px);
-      opacity: 0;
-    }
+    0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
   }
 }
 
@@ -66,6 +44,8 @@
   :root {
     --background: 210 40% 98%;
     --foreground: 222 47% 11%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --card: 0 0% 100%;
 
@@ -77,7 +57,11 @@
 
   .dark {
     --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
+    /* Made foreground lighter for better contrast (was 213 31% 91%) */
+    --foreground: 210 40% 98%; 
+    --muted: 217.2 32.6% 17.5%;
+    /* Made muted text lighter (was too dark grey) */
+    --muted-foreground: 215 20.2% 75.1%; 
 
     --card: 222 47% 8%;
 
@@ -105,21 +89,11 @@
   margin-inline: auto;
   padding-inline: 2rem;
 
-  @media (width >= 640px) {
-    max-width: 640px;
-  }
-  @media (width >= 768px) {
-    max-width: 768px;
-  }
-  @media (width >= 1024px) {
-    max-width: 1024px;
-  }
-  @media (width >= 1280px) {
-    max-width: 1280px;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
+  @media (width >= 640px) { max-width: 640px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1280px; }
+  @media (width >= 1400px) { max-width: 1400px; }
 }
 
 @utility text-glow {
@@ -128,7 +102,11 @@
 }
 
 @utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+  @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-primary/50;
+}
+
+@utility glass-card {
+  @apply relative transition-all duration-300 border shadow-lg rounded-xl border-white/10 bg-white/5 backdrop-blur-md;
 }
 
 @utility gradient-border {
@@ -140,8 +118,8 @@
 
 @utility cosmic-button {
   @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium 
-         transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
-         hover:scale-105 active:scale-95;
+         transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)]
+         hover:scale-105 active:scale-95 cursor-pointer;
 }
 
 @utility star {
